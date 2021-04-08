@@ -1,0 +1,17 @@
+// x pow y % mod
+const ll mod = 1e9 + 7;
+
+template <typename T>
+T pow(T x, T y){
+	T ret = 1;
+	while(y){
+		if(y & 1) ret *= x, ret %= mod;
+		y >>= 1;
+		x *= x
+		x %= mod;
+	}
+	return ret;
+}
+T inv_pow(T x){
+	return pow(x, mod - 2, mod);
+}
