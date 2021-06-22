@@ -1,11 +1,10 @@
 const int maxa = 2e5 + 5;
 const ll mod = 1e9 + 7;
 
-template <typename T>
-T f[maxa], finv[maxa], inv[maxa];
+ll f[maxa], finv[maxa], inv[maxa];
 
 // cal 1!, 2!, ... n!
-template <typename T>
+
 void calf(){
 	f[0] = f[1] = 1;
 	finv[0] = finv[1] = 1;
@@ -18,8 +17,8 @@ void calf(){
 
 }
 // nCk -> choose k items from n items.
-template <typename T>
-T nCk(T n, T k){
+
+ll nCk(ll n, ll k){
 	if(n < k) return 0;
 	if(n < 0 || k < 0) return 0;
 	return f[n] * (finv[n - k] * finv[k]  % mod) % mod;
@@ -27,7 +26,7 @@ T nCk(T n, T k){
 // nHk -> choose k items from n types of item, allow dup
 // ex: choose 3 items in 3 types
 // {1 2 0} {1 1 1} {1 0 2} {0 0 3} ....
-template <typename T>
-T nHk(T n, T k){
+
+ll nHk(ll n, ll k){
 	return nCk(n + k - 1, n - 1);
 }

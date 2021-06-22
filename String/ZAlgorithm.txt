@@ -1,0 +1,21 @@
+vector<int> z(n+1);
+z[0] = n;
+int l = 0, r = 0;
+for(int i = 1; i < n; ++i){
+	if(r < i){
+		l = r = i;
+		while(s[r] == s[r - l]) r++;
+		r--;
+		z[i] = r - l + 1;
+	}
+	else{
+		int k = i - l;
+		if(z[k] + k > r){
+			l = r = i;
+			while(s[r] == s[r - l]) r++;
+			r--;
+			z[i] = r - l + 1;
+		}
+		else z[i] = z[k];
+	}
+}

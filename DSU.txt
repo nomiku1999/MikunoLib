@@ -1,0 +1,17 @@
+void init() {
+    for(int i = 0; i < n; ++i){
+    	p[i] = i;
+    }
+}
+
+int get(int v) {
+    return p[v] == v ? v : p[v] = get(p[v]);
+}
+
+bool union(int a, int b) {
+    a = get(a);
+    b = get(b);
+    if(a == b) return false;
+    p[b] = a;
+    return true;
+}

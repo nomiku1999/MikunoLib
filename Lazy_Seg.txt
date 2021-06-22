@@ -1,0 +1,52 @@
+struct SegmentTree {
+    int n;
+    std::vector<int> sum, tag;
+    SegmentTree(int n) : n(n), sum(4 * n), tag(4 * n, -1) {}
+    void pull(int p) {
+        sum[p] = sum[2 * p] + sum[2 * p + 1];
+    }
+    void modify(int p, int l, int r, int v) {
+        sum[p] = (r - l) * v;
+        tag[p] = v;
+    }
+    void push(int p, int l, int r) {
+        int m = (l + r) / 2;
+        if (tag[p] != -1) {
+            modify(2 * p, l, m, tag[p]);
+            modify(2 * p + 1, m, r, tag[p]);
+            tag[p] = -1;
+        }
+    }
+    void modify(int p, int l, int r, int x, int y, int v) {
+        if (l >= y || r <= x) {
+            return;
+        }
+        if (l >= x && r <= y) {
+            return modify(p, l, r, v);
+        }
+        int m = (l + r) / 2;
+        push(p, l, r);
+        modify(2 * p, l, m, x, y, v);
+        modify(2 * p + 1, m, r, x, y, v);
+        pull(p);
+    }
+	// USE this modify [l, r)
+    void modify(int x, int y, int v) {
+        modify(1, 0, n, x, y, v);
+    }
+    int rangeSum(int p, int l, int r, int x, int y) {
+        if (l >= y || r <= x) {
+            return 0;
+        }
+        if (l >= x && r <= y) {
+            return sum[p];
+        }
+        int m = (l + r) / 2;
+        push(p, l, r);
+        return rangeSum(2 * p, l, m, x, y) + rangeSum(2 * p + 1, m, r, x, y);
+    }	
+	//// USE this range Sum [l, r)
+    int rangeSum(int l, int r) {
+        return rangeSum(1, 0, n, l, r);
+    }
+};

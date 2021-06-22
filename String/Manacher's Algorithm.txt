@@ -1,0 +1,35 @@
+// LPS = longest palindrome substring
+// Manacher's find LPS with odd and even length in O(n)
+// m[i] is maximum length of palindromes with odd length at position i
+// actual length of palindromes is 2 * odd[i] + 1
+int L = 0, R = -1;
+vector<int> odd(n);
+for(int i = 0; i < n; ++i){
+	odd[i] = 0;
+	if(i < R) odd[i] = min(R - i, odd[L + R - i]);
+	int l = i - odd[i] - 1, r = i + odd[i] + 1;
+	while(l >= 0 && r < n && s[l] == s[r]) l--,r++, odd[i]++;
+	l++, r--;
+	if(R < r){
+		R = r;
+		L = l;
+	}
+}
+// with even just replace R - i with R - i - 1, and l = i - even[i]
+// actual length of palindromes is 2 * even[i]
+L = 0, R = -1;
+vector<int> even(n);
+for(int i = 0; i < n; ++i){
+	even[i] = 0;
+	if(i < R) even[i] = min(R - i - 1, even[L + R - i - 1]);
+	int l = i - even[i], r = i + even[i] + 1;
+	while(l >= 0 && r < n && s[l] == s[r]) l--,r++, even[i]++;
+	l++, r--;
+	if(R < r){
+		R = r;
+		L = l;
+	}
+}
+// Number of Different Palindrome Substrings
+// using hash when you extending the l, r
+// O(n)
