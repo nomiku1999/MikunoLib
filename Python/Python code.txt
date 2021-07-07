@@ -1,0 +1,12 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+***
+Python list can't not copy by function, MUST copy by hand
+str can change values
+set{} can't put list, MUST use tuple
+
+from itertools import combinations

@@ -1,0 +1,77 @@
+Mutable set methods:
+
+SortedSet.__contains__()
+
+SortedSet.__iter__()
+
+SortedSet.__len__()
+
+SortedSet.add()
+
+SortedSet.discard()
+
+Sequence methods:
+
+SortedSet.__getitem__()
+
+SortedSet.__delitem__()
+
+SortedSet.__reversed__()
+
+Methods for removing values:
+
+SortedSet.clear()
+
+SortedSet.pop()
+
+SortedSet.remove()
+
+Set-operation methods:
+
+SortedSet.difference()
+
+SortedSet.difference_update()
+
+SortedSet.intersection()
+
+SortedSet.intersection_update()
+
+SortedSet.symmetric_difference()
+
+SortedSet.symmetric_difference_update()
+
+SortedSet.union()
+
+SortedSet.update()
+
+Methods for miscellany:
+
+SortedSet.copy()
+
+SortedSet.count()
+
+SortedSet.__repr__()
+
+SortedSet._check()
+
+Sorted list methods available:
+
+SortedList.bisect_left()
+
+SortedList.bisect_right()
+
+SortedList.index()
+
+SortedList.irange()
+
+SortedList.islice()
+
+SortedList._reset()
+
+Additional sorted list methods available, if key-function used:
+
+SortedKeyList.bisect_key_left()
+
+SortedKeyList.bisect_key_right()
+
+SortedKeyList.irange_key()

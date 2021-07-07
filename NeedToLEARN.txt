@@ -1,0 +1,2 @@
+LCP array
+Ukkonen's algorithm to build a suffix tree in linear time
