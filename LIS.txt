@@ -1,0 +1,15 @@
+int LIS(vector<int>& v)
+{
+  vector<int> tail(v.size(), 0);
+  int length = 1;
+  tail[0] = v[0];
+  for (size_t i = 1; i < v.size(); i++) {
+    if (v[i] < tail[0])
+      tail[0] = v[i];
+    else if (v[i] > tail[length - 1])
+      tail[length++] = v[i];
+    else
+      tail[lower_bound(tail.begin(), tail.begin() + length, v[i]) - tail.begin()] = v[i];
+  }
+  return length;
+}

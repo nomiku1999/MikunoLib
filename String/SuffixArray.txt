@@ -52,7 +52,7 @@ vector<int> suffix_array_construction(string s) {
     //sorted_shifts.erase(sorted_shifts.begin());
     return sorted_shifts;
 }
-// LCP
+// LCP longest common prefix
 vector<int> lcp_construction(string const& s, vector<int> const& p) { // p is suff
     int n = s.size();
     vector<int> rank(n, 0);

@@ -1,21 +1,29 @@
-int log[MAXN+1];
-void preCal(){
-	log[1] = 0;
-	for (int i = 2; i <= MAXN; i++)
-		log[i] = log[i/2] + 1;
-}
-
-int st[MAXN][K + 1];
-void build(){
-	for (int i = 0; i < N; i++)
-    st[i][0] = array[i];
-
-	for (int j = 1; j <= K; j++)
-	    for (int i = 0; i + (1 << j) <= N; i++)
-	        st[i][j] = min(st[i][j-1], st[i + (1 << (j - 1))][j - 1]);
-}
-
-int queries(int l, int r){
-	int j = log[R - L + 1];
-	return min(st[L][j], st[R - (1 << j) + 1][j]);
-}
+const int INF = 1000000000;
+template <typename T>
+struct sparse_table{
+	vector<vector<T>> ST;
+	sparse_table(vector<T> &A){
+		int N = A.size();
+		int LOG = 32 - __builtin_clz(N);
+		ST = vector<vector<T>>(LOG, vector<T>(N));
+		for (int i = 0; i < N; i++){
+			ST[0][i] = A[i];
+		}
+		for (int i = 0; i < LOG - 1; i++){
+			for (int j = 0; j < N - (1 << i); j++){
+				ST[i + 1][j] = __gcd(ST[i][j], ST[i][j + (1 << i)]);
+			}
+		}
+	}
+	T range_gcd(int L, int R){
+		if (L >= R){
+			return -INF;
+		}
+		int d = 31 - __builtin_clz(R - L);
+		T ret = __gcd(ST[d][L], ST[d][R - (1 << d)]);
+		return ret;
+	}
+};
+// answer from [l, r)
+vector<int> dp;
+sparse_table<int> ST(dp);
